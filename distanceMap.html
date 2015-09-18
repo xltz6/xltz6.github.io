@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>distanceMap</title>
+    <style>
+        .header{
+            margin-top: 180px;
+            margin-bottom: 100px;
+            font-family: Arial;
+            text-align: center;
+            color: red;
+            font-size: 30px;
+        }
+        .title{
+            font-family: Arial;
+            text-align: center;
+            color: cadetblue;
+            font-size: 18px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        #googleMap{
+            margin-left: 240px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        .btn{
+             font-size: 20px;
+        }
+    </style>
+    <script>
+        function initMap() {
+            var myApartment = {lat: 38.924837, lng: -92.336131}; 
+            var LafferreHall = {lat: 38.946268, lng: -92.330101}; 
+
+            var map = new google.maps.Map(document.getElementById('googleMap'), {
+                center: myApartment,
+                scrollwheel: false,
+                zoom: 15
+            });
+
+            var directionsDisplay = new google.maps.DirectionsRenderer({
+                map: map
+            });
+
+            // Set destination, origin and travel mode.
+            var request = {
+                destination: LafferreHall,
+                origin: myApartment,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+
+            // Pass the directions request to the directions service.
+            var directionsService = new google.maps.DirectionsService();
+            directionsService.route(request, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                  // Display the route on the map.
+                    directionsDisplay.setDirections(response);
+                }
+            });
+        }
+        function loadScript()
+        {
+          var script = document.createElement("script");
+          script.type = "text/javascript";
+          script.src = "http://maps.googleapis.com/maps/api/js?key=&sensor=false&callback=initMap";
+          document.body.appendChild(script);
+        }
+
+        window.onload = loadScript;
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <h>This map shows the driving distance from my apartment to Lafferre Hall</h>
+    </div>
+    <div id="googleMap" style="width:700px;height:550px;"></div>
+    <div class="title"><button src="makerAnimation.html" class="btn">Next Page</button></div>
+</body>
+</html>
