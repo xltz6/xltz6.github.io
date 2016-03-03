@@ -41,10 +41,8 @@
         function createChart() {
 
 //            $('#container').highcharts('StockChart', {
-            var chart = new Highcharts.Chart({
-                chart:{
-                    renderTo: 'container'
-                },
+            var chart = new Highcharts.StockChart({
+                renderTo: 'container',
                 
                 rangeSelector: {
                     selected: 4
