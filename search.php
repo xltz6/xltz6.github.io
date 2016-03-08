@@ -121,7 +121,7 @@
                 </div>
             </form>
             <br>
-                <!-- dropdown -->
+            <!-- dropdown -->
             <div class="input-group col-sm-5 col-sm-offset-3" form="search">
                 <h4>Market Sector</h4>
                 <select style="width:100%;height:25px; text-align: left;" name="sector" class="btn btn-default" type="button">
@@ -133,10 +133,115 @@
                     <option value="Conglomerates">Conglomerates</option>
                     <option value="Energy">Energy</option>
                     <option value="Utilities">Utilities</option>
-
                 </select>
-
             </div>
             
+        </div>
+        <br><br><br>
+        
+        <div class="row">
+            <!-- Search Table -->
+<!--
+            <div class="col-md-8 well">
+                <h4 style="text-align:center;">Search Results</h4>
+                <table class="table table-striped table-bordered">
+                <thead class="thread-inverse">
+                <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                </tr>
+                <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+                </tr>
+                <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+                </tr>
+                </tbody>
+                </table>
+                
+            </div>
+-->
+            <?php
+                require 'yahoo-finance-api/lib/YahooFinance/YahooFinance.php';
+                $yf = new YahooFinance;
+                $quote = json_decode($yf->getQuotes(array('IDA', 'MCEP', 'UWTI')));
+                ?>
+                <table>
+                    <tr>
+                        <td>Symbol</td>
+                        <td>Price</td>
+                        <td>Fifty Day</td>
+                        <td>% Change</td>
+                    </tr>
+                <?php
+                    foreach($quote->query->results->quote as $stock)
+                    {
+                        if (substr($stock->PercentChange, 0, 1) === '+')
+                        {
+                            $color = "green";
+                        }
+                        else
+                        {
+                            $color = "red";
+                        }
+                        echo '<tr>';
+                        echo '<td>' . $stock->symbol . '</td>';
+                        echo '<td>' . number_format((float)$stock->LastTradePriceOnly, 2, '.', '') . '</td>';
+                        echo '<td>' . number_format((float)$stock->FiftydayMovingAverage, 2, '.', '') . '</td>';
+                        echo '<td style="color:'.$color.'">' . $stock->PercentChange . '</td>';
+                        echo '</tr>';
+                    }
+                    ?>
+                </table>
+            <!-- Chart Table -->
+            <div class="col-md-3 well" style="margin-left:20px;">
+                <h4>Stock to Chart</h4>
+                <table class="table table-striped table-bordered">
+                <thead class="thread-inverse">
+                <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                </tr>
+                <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+                </tr>
+                <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+                </tr>
+                </tbody>
+                </table>
+            </div>
         </div>
     </div>
