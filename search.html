@@ -103,18 +103,30 @@
 
         <!-- Heading Row -->
         <div class="row">
-             <!-- Search bar -->
-           <div class="col-sm-6 col-sm-offset-3">
-            <div id="imaginary_container"> 
-                <div class="input-group stylish-input-group">
-                    <input type="text" class="form-control"  placeholder="Search" >
-                    <span class="input-group-addon">
-                        <button type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>  
-                    </span>
+             <!-- Search box -->
+            <div id="custom-search-input">
+                <div class="input-group col-sm-5 col-sm-offset-3">
+                    <input type="text" class="search-query form-control" placeholder="Search"></input>
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button">
+                                <span class=" glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+
                 </div>
             </div>
-        </div>
+            <br>
+            <div class="input-group col-sm-5 col-sm-offset-3">
+                <h4>Market Sector</h4>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Technology <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">HTML</a></li>
+                        <li><a href="#">CSS</a></li>
+                        <li><a href="#">JavaScript</a></li>
+                    </ul>
+                </div>
+
+            </div>
         </div>
     </div>
