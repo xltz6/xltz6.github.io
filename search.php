@@ -178,37 +178,37 @@
             </div>
 -->
             <?php
-                require 'yahoo-finance-api/lib/YahooFinance/YahooFinance.php';
-                $yf = new YahooFinance;
-                $quote = json_decode($yf->getQuotes(array('IDA', 'MCEP', 'UWTI')));
-                ?>
-                <table>
-                    <tr>
-                        <td>Symbol</td>
-                        <td>Price</td>
-                        <td>Fifty Day</td>
-                        <td>% Change</td>
-                    </tr>
-                <?php
-                    foreach($quote->query->results->quote as $stock)
+            require 'yahoo-finance-api/lib/YahooFinance/YahooFinance.php';
+            $yf = new YahooFinance;
+            $quote = json_decode($yf->getQuotes(array('IDA', 'MCEP', 'UWTI')));
+            ?>
+            <table>
+                <tr>
+                    <td>Symbol</td>
+                    <td>Price</td>
+                    <td>Fifty Day</td>
+                    <td>% Change</td>
+                </tr>
+            <?php
+                foreach($quote->query->results->quote as $stock)
+                {
+                    if (substr($stock->PercentChange, 0, 1) === '+')
                     {
-                        if (substr($stock->PercentChange, 0, 1) === '+')
-                        {
-                            $color = "green";
-                        }
-                        else
-                        {
-                            $color = "red";
-                        }
-                        echo '<tr>';
-                        echo '<td>' . $stock->symbol . '</td>';
-                        echo '<td>' . number_format((float)$stock->LastTradePriceOnly, 2, '.', '') . '</td>';
-                        echo '<td>' . number_format((float)$stock->FiftydayMovingAverage, 2, '.', '') . '</td>';
-                        echo '<td style="color:'.$color.'">' . $stock->PercentChange . '</td>';
-                        echo '</tr>';
+                        $color = "green";
                     }
-                    ?>
-                </table>
+                    else
+                    {
+                        $color = "red";
+                    }
+                    echo '<tr>';
+                    echo '<td>' . $stock->symbol . '</td>';
+                    echo '<td>' . number_format((float)$stock->LastTradePriceOnly, 2, '.', '') . '</td>';
+                    echo '<td>' . number_format((float)$stock->FiftydayMovingAverage, 2, '.', '') . '</td>';
+                    echo '<td style="color:'.$color.'">' . $stock->PercentChange . '</td>';
+                    echo '</tr>';
+                }
+                ?>
+            </table>
             <!-- Chart Table -->
             <div class="col-md-3 well" style="margin-left:20px;">
                 <h4>Stock to Chart</h4>
